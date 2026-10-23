@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: windows-latest
+            bundles: nsis
+          - os: ubuntu-22.04
+            bundles: deb,appimage
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: swatinem/rust-cache@v2
+        with:
+          workspaces: src-tauri
+      - if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev librsvg2-dev patchelf
+      - run: bun install --frozen-lockfile
+      - run: bun run model
+      - name: CLIP runs on this platform
+        run: cargo test --manifest-path src-tauri/Cargo.toml clip_produces_normalized_embeddings -- --ignored
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tauriScript: bun run tauri
+          tagName: ${{ github.ref_name }}
+          releaseName: Ganymede ${{ github.ref_name }}
+          releaseBody: Windows installer (-setup.exe) and Linux packages (.deb, .AppImage). Unsigned builds.
+          args: --bundles ${{ matrix.bundles }}
+      - name: The app starts and stays open
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $app = Start-Process src-tauri/target/release/ganymede.exe -PassThru
+          Start-Sleep -Seconds 20
+          if ($app.HasExited) { throw "the app closed by itself on startup (exit code $($app.ExitCode))" }
+          Stop-Process -Id $app.Id

@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "What every window may call: the media-ready event and opening links in the browser",
+  "windows": ["main", "pane-*"],
+  "permissions": [
+    "core:event:allow-listen",
+    "core:event:allow-unlisten",
+    "opener:allow-open-url",
+    "opener:allow-default-urls"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "panes",
+  "description": "The main window opens, focuses and closes the windows that hold detached panes",
+  "windows": ["main"],
+  "permissions": ["core:webview:allow-create-webview-window", "core:window:allow-close", "core:window:allow-set-focus"]
+}

@@ -1,0 +1,5 @@
+bun.lock
+dist
+src-tauri/target
+src-tauri/gen
+src/features/search/pipeline/fixtures

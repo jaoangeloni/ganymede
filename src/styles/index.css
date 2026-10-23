@@ -1,0 +1,451 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --backdrop: #e8e8e5;
+  --bg: #f4f4f2;
+  --surface: #ffffff;
+  --fg: #161616;
+  --muted: #6e6e6e;
+  --line: rgb(0 0 0 / 0.1);
+  --primary: #f1d06a;
+  --danger: #d93036;
+  --on-primary: #2b2309;
+  --primary-ink: #8f6e0e;
+  --skeleton: rgb(0 0 0 / 0.07);
+  --float: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.08);
+  --ink-light: 0.8;
+  --focus-ring: var(--primary-ink);
+  --grid-dot: rgb(0 0 0 / 0.24);
+  --print: #fbfaf7;
+  --note: #f3ecd6;
+  --note-ink: #3c3a35;
+  --float-hover: 0 1px 2px rgb(0 0 0 / 0.07), 0 12px 28px rgb(0 0 0 / 0.12);
+  --float-raised: 0 2px 3px rgb(0 0 0 / 0.14), 0 22px 34px rgb(0 0 0 / 0.24);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --backdrop: #070707;
+  --bg: #101010;
+  --surface: #1c1c1c;
+  --fg: #ececec;
+  --muted: #909090;
+  --line: rgb(255 255 255 / 0.1);
+  --primary: #f2d98a;
+  --primary-ink: #f2d98a;
+  --danger: #f0484e;
+  --skeleton: rgb(255 255 255 / 0.07);
+  --float: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.35);
+  --ink-light: 1;
+  --focus-ring: var(--primary-ink);
+  --grid-dot: rgb(255 255 255 / 0.17);
+  --print: #dedcd6;
+  --note: #3d3d3b;
+  --note-ink: #f5f5f3;
+  --float-hover: 0 1px 2px rgb(0 0 0 / 0.45), 0 12px 28px rgb(0 0 0 / 0.45);
+  --float-raised: 0 2px 3px rgb(0 0 0 / 0.5), 0 22px 34px rgb(0 0 0 / 0.6);
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-skeleton: var(--skeleton);
+  --color-primary: var(--primary);
+  --color-danger: var(--danger);
+  --color-on-primary: var(--on-primary);
+  --color-primary-ink: var(--primary-ink);
+  --shadow-float: var(--float);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", sans-serif;
+  --ease-swift: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-spring: cubic-bezier(0.34, 1.32, 0.64, 1);
+
+  --animate-fade-in: fade-in 180ms var(--ease-swift) both;
+  --animate-rise-in: rise-in 240ms var(--ease-swift) both;
+  --animate-pop-in: pop-in 160ms var(--ease-swift) both;
+  --animate-slide-in: slide-in 220ms var(--ease-swift) both;
+  --animate-breathe: breathe 1.6s ease-in-out infinite;
+  --animate-appear: appear 260ms var(--ease-swift) both;
+  --animate-cell-in: cell-in 520ms var(--ease-swift) both;
+  --animate-place: place 460ms var(--ease-spring) both;
+  --animate-menu-in: menu-in 170ms var(--ease-swift) both;
+  --animate-drop-in: drop-in 280ms var(--ease-spring) both;
+  --animate-bump: bump 420ms var(--ease-spring) both;
+  --animate-peek: peek 260ms var(--ease-spring) both;
+  --animate-swap: swap 320ms var(--ease-swift) both;
+  --animate-wiggle: wiggle 460ms ease-in-out both;
+  --animate-countdown: countdown linear both;
+  --animate-sink: sink 180ms ease-in both;
+
+  @keyframes menu-in {
+    from {
+      opacity: 0;
+      transform: translateY(var(--menu-from, -4px)) scale(0.97);
+    }
+  }
+  @keyframes drop-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.97);
+    }
+  }
+  @keyframes bump {
+    from {
+      scale: 1.35;
+    }
+  }
+  @keyframes peek {
+    from {
+      opacity: 0;
+      transform: translateX(-8px) scale(0.94);
+    }
+  }
+  @keyframes swap {
+    from {
+      opacity: 0;
+      transform: translateX(var(--swap-x, 0px)) scale(0.985);
+    }
+  }
+  @keyframes wiggle {
+    25% {
+      rotate: -9deg;
+    }
+    55% {
+      rotate: 7deg;
+    }
+    80% {
+      rotate: -3deg;
+    }
+  }
+  @keyframes countdown {
+    to {
+      scale: 0 1;
+    }
+  }
+  @keyframes sink {
+    to {
+      opacity: 0;
+      transform: translateY(6px) scale(0.97);
+    }
+  }
+
+  @keyframes place {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(1.06);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes cell-in {
+    from {
+      opacity: 0;
+      transform: translate(var(--cell-x, 0px), 14px) scale(0.96);
+    }
+  }
+  @keyframes appear {
+    from {
+      opacity: 0;
+      scale: 0.96;
+    }
+  }
+  @keyframes rise-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px) scale(0.97);
+    }
+  }
+  @keyframes pop-in {
+    from {
+      opacity: 0;
+      transform: scale(0.6);
+    }
+  }
+  @keyframes slide-in {
+    from {
+      opacity: 0;
+      transform: translateX(10px);
+    }
+  }
+  @keyframes breathe {
+    50% {
+      opacity: 0.5;
+    }
+  }
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    overflow: hidden;
+    background: var(--backdrop);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 40%, var(--bg));
+    color: var(--fg);
+  }
+  input,
+  textarea {
+    caret-color: var(--primary-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--fg);
+    outline-offset: 2px;
+  }
+}
+
+.selected {
+  outline: calc(2px / var(--zoom, 1)) solid var(--fg);
+  outline-offset: calc(2px / var(--zoom, 1));
+}
+
+.link-target {
+  outline: calc(2px / var(--zoom, 1)) dashed var(--primary-ink);
+  outline-offset: calc(4px / var(--zoom, 1));
+}
+
+@layer components {
+  .pin-paper {
+    background: var(--print);
+    box-shadow: var(--float);
+  }
+  .pin-paper:hover {
+    box-shadow: var(--float-hover);
+  }
+  .pin-paper[data-lifted] {
+    box-shadow: var(--float-raised);
+  }
+  .note-paper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow: var(--float);
+    clip-path: polygon(
+      -80px -80px,
+      calc(100% + 80px) -80px,
+      calc(100% + 80px) calc(100% - var(--fold) - 80px),
+      calc(100% - var(--fold) - 80px) calc(100% + 80px),
+      -80px calc(100% + 80px)
+    );
+    transition: box-shadow 380ms var(--ease-spring);
+  }
+  .note-paper:hover::before {
+    box-shadow: var(--float-hover);
+  }
+  .note-paper[data-lifted]::before {
+    box-shadow: var(--float-raised);
+  }
+}
+
+.note-sheet {
+  --frame: 12px;
+  border-radius: inherit;
+  background: var(--print);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - var(--fold)), calc(100% - var(--fold)) 100%, 0 100%);
+}
+
+.note-sheet::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: var(--fold);
+  height: var(--fold);
+  pointer-events: none;
+  border-top-left-radius: calc(var(--fold) * 0.22);
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--print), #000 6%),
+    color-mix(in srgb, var(--print), #000 20%) 50%,
+    transparent 50%
+  );
+  filter: drop-shadow(-1px -1px 1.5px rgb(0 0 0 / 0.14));
+}
+
+.note-card {
+  border-radius: 4px;
+  background: var(--note);
+  color: var(--note-ink);
+}
+
+.note-text {
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 12px;
+  padding-bottom: max(calc(var(--fold) - var(--frame)), 12px);
+}
+
+.note-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--note-ink) 30%, transparent) transparent;
+}
+
+.map-dots,
+.map-dots::before {
+  --dot: radial-gradient(circle, var(--grid-dot) 1px, transparent 1.6px);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: calc(var(--dot-step) * 2px) calc(var(--dot-step) * 2px);
+}
+
+.map-dots {
+  inset: 0 auto auto 0;
+  width: 100vw;
+  height: 100vh;
+  will-change: transform;
+  background-image: var(--dot);
+  background-position: calc(var(--dot-x) * 1px) calc(var(--dot-y) * 1px);
+}
+
+.map-dots::before {
+  content: "";
+  opacity: var(--dot-fade);
+  background-image: var(--dot), var(--dot), var(--dot);
+  background-position:
+    calc((var(--dot-x) + var(--dot-step)) * 1px) calc(var(--dot-y) * 1px),
+    calc(var(--dot-x) * 1px) calc((var(--dot-y) + var(--dot-step)) * 1px),
+    calc((var(--dot-x) + var(--dot-step)) * 1px) calc((var(--dot-y) + var(--dot-step)) * 1px);
+}
+
+nav [data-drop] {
+  transition:
+    scale 220ms var(--ease-spring),
+    color 150ms ease,
+    background-color 150ms ease;
+}
+nav [data-over] {
+  scale: 1.025;
+}
+
+[data-over] {
+  outline: calc(2px / var(--zoom, 1)) dashed var(--fg);
+  outline-offset: calc(-2px / var(--zoom, 1));
+  background-color: var(--skeleton);
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+}
+
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 440ms;
+  animation-timing-function: var(--ease-swift);
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 180ms;
+}
+
+:root[data-theme-flip]::view-transition-old(root),
+:root[data-theme-flip]::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+[data-morph] [data-prompt] {
+  view-transition-name: prompt;
+}
+[data-reflow] nav[aria-label="Navigation"] {
+  view-transition-name: sidebar;
+}
+[data-reflow] [data-pane="board"],
+[data-reflow] [data-dock="board"] {
+  view-transition-name: pane-board;
+}
+[data-reflow] [data-pane="map"],
+[data-reflow] [data-dock="map"] {
+  view-transition-name: pane-map;
+}
+[data-reflow] [data-pane="catalog"],
+[data-reflow] [data-dock="catalog"] {
+  view-transition-name: pane-catalog;
+}
+::view-transition-group(sidebar),
+::view-transition-group(pane-board),
+::view-transition-group(pane-map),
+::view-transition-group(pane-catalog) {
+  animation-duration: 340ms;
+  animation-timing-function: var(--ease-swift);
+  overflow: clip;
+  border-radius: 12px;
+}
+::view-transition-old(sidebar),
+::view-transition-new(sidebar),
+::view-transition-old(pane-board),
+::view-transition-new(pane-board),
+::view-transition-old(pane-map),
+::view-transition-new(pane-map),
+::view-transition-old(pane-catalog),
+::view-transition-new(pane-catalog) {
+  height: 100%;
+  object-fit: none;
+  object-position: left top;
+}
+::view-transition-new(sidebar):only-child,
+::view-transition-new(pane-board):only-child,
+::view-transition-new(pane-map):only-child,
+::view-transition-new(pane-catalog):only-child {
+  animation: pane-in 340ms var(--ease-swift) both;
+}
+::view-transition-old(sidebar):only-child,
+::view-transition-old(pane-board):only-child,
+::view-transition-old(pane-map):only-child,
+::view-transition-old(pane-catalog):only-child {
+  animation: pane-out 200ms ease-in both;
+}
+@keyframes pane-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+@keyframes pane-out {
+  to {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after,
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
